@@ -638,8 +638,8 @@ show_nodes() {
       ip=$(public_ipv4)
       if [[ -n $ip ]]; then
         if [[ -n ${HY2_HOP_RANGE:-} ]]; then
-          printf 'hysteria2://%s@%s:%s/?insecure=1&sni=%s&pinSHA256=%s#JD-HY2-Hop\n' \
-            "$HY2_PASSWORD" "$ip" "$HY2_HOP_RANGE" "$SNI" "$HY2_PIN"
+          printf 'hysteria2://%s@%s:%s/?mport=%s&insecure=1&sni=%s&pinSHA256=%s#JD-HY2-Hop\n' \
+            "$HY2_PASSWORD" "$ip" "$HY2_PORT" "$HY2_HOP_RANGE" "$SNI" "$HY2_PIN"
         else
           printf 'hysteria2://%s@%s:%s/?insecure=1&sni=%s&pinSHA256=%s#JD-HY2\n' \
             "$HY2_PASSWORD" "$ip" "$HY2_PORT" "$SNI" "$HY2_PIN"

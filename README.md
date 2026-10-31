@@ -38,7 +38,7 @@ sudo jd
 ## 注意
 
 - Argo 使用 Cloudflare Quick Tunnel，无需域名或 Tunnel Token。它适合临时使用；隧道进程重新建立后域名会变化，届时重新运行 `jd` 并更新客户端链接。Cloudflare 不保证 Quick Tunnel 的可用性。
-- 新安装的 Hysteria2 默认监听 **UDP 443**，并用 iptables 将 UDP **2053–2083** 转发到 443，实现端口跳跃。安装时不再询问 HY2 端口。`jd` 只显示一条端口跳跃链接；客户端须支持 Hysteria2 多端口 URI。
+- 新安装的 Hysteria2 默认监听 **UDP 443**，并用 iptables 将 UDP **2053–2083** 转发到 443，实现端口跳跃。安装时不再询问 HY2 端口。`jd` 只显示一条链接，使用 v2rayN 可识别的 `:443/?mport=2053-2083` 格式。`mport` 是 v2rayN 的扩展参数；忽略该参数的客户端会连接 UDP 443，不会跳跃。
 - 若 VPS 提供商有独立防火墙，需在其管理面板放行 **UDP 443 和 2053–2083**。脚本放行本机 UDP 443；systemd 在 HY2 启动时添加跳跃转发规则、停止时删除，`jdxz` 也会清理。跳跃入口适用于 IPv4 节点地址；旧版本已经安装的 HY2 节点保持原有配置。
 - VLESS Reality 使用独立的 Xray 服务，默认监听 TCP 443；可与使用 UDP 443 的 Hysteria2 同时运行。若 TCP 443 被占用，可在安装时选择其他端口。SNI 和目标站点为 `www.amd.com`。VPS 必须能够访问该站点；若服务商有额外防火墙，还须放行所选 TCP 端口。脚本会按与 HY2 相同的方式配置本机 UFW 或 iptables 入站规则，并在卸载时清理。客户端需支持 VLESS、Reality 和 XTLS Vision。
 - Hysteria2 使用自签证书，节点链接提供 `pinSHA256` 指纹校验。客户端需支持 Hysteria2 与该参数。
