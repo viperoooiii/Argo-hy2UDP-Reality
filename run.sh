@@ -640,9 +640,10 @@ show_nodes() {
         if [[ -n ${HY2_HOP_RANGE:-} ]]; then
           printf 'hysteria2://%s@%s:%s/?insecure=1&sni=%s&pinSHA256=%s#JD-HY2-Hop\n' \
             "$HY2_PASSWORD" "$ip" "$HY2_HOP_RANGE" "$SNI" "$HY2_PIN"
+        else
+          printf 'hysteria2://%s@%s:%s/?insecure=1&sni=%s&pinSHA256=%s#JD-HY2\n' \
+            "$HY2_PASSWORD" "$ip" "$HY2_PORT" "$SNI" "$HY2_PIN"
         fi
-        printf 'hysteria2://%s@%s:%s/?insecure=1&sni=%s&pinSHA256=%s#JD-HY2\n' \
-          "$HY2_PASSWORD" "$ip" "$HY2_PORT" "$SNI" "$HY2_PIN"
       else
         printf '无法识别公网 IPv4；请检查网络后重试 jd。\n'
       fi
