@@ -619,7 +619,7 @@ show_nodes() {
     host=$(current_argo_host)
     printf '\nArgo：%s\n' "$(systemctl is-active jd-argo.service 2>/dev/null || true)"
     if [[ -n $host ]]; then
-      printf 'vless://%s@%s:443?encryption=none&type=ws&path=%%2F%s&host=%s&security=tls&sni=%s#A\n' \
+      printf 'vless://%s@%s:443?encryption=none&type=ws&path=%%2F%s&host=%s&security=tls&sni=%s#JD-A\n' \
         "$ARGO_UUID" "$host" "${ARGO_PATH#/}" "$host" "$host"
     else
       printf '暂未取得临时域名。请稍后执行 jd，或检查 journalctl -u jd-argo。\n'
@@ -638,10 +638,10 @@ show_nodes() {
       ip=$(public_ipv4)
       if [[ -n $ip ]]; then
         if [[ -n ${HY2_HOP_RANGE:-} ]]; then
-          printf 'hysteria2://%s@%s:%s/?mport=%s&insecure=1&sni=%s&pinSHA256=%s#H\n' \
+          printf 'hysteria2://%s@%s:%s/?mport=%s&insecure=1&sni=%s&pinSHA256=%s#JD-H\n' \
             "$HY2_PASSWORD" "$ip" "$HY2_PORT" "$HY2_HOP_RANGE" "$SNI" "$HY2_PIN"
         else
-          printf 'hysteria2://%s@%s:%s/?insecure=1&sni=%s&pinSHA256=%s#H\n' \
+          printf 'hysteria2://%s@%s:%s/?insecure=1&sni=%s&pinSHA256=%s#JD-H\n' \
             "$HY2_PASSWORD" "$ip" "$HY2_PORT" "$SNI" "$HY2_PIN"
         fi
       else
@@ -660,7 +660,7 @@ show_nodes() {
     else
       ip=$(public_ipv4)
       if [[ -n $ip ]]; then
-        printf 'vless://%s@%s:%s?encryption=none&flow=xtls-rprx-vision&security=reality&sni=%s&fp=chrome&pbk=%s&sid=%s&type=tcp#R\n' \
+        printf 'vless://%s@%s:%s?encryption=none&flow=xtls-rprx-vision&security=reality&sni=%s&fp=chrome&pbk=%s&sid=%s&type=tcp#JD-R\n' \
           "$REALITY_UUID" "$ip" "$REALITY_PORT" "$REALITY_SNI" "$REALITY_PUBLIC_KEY" "$REALITY_SHORT_ID"
       else
         printf '无法识别公网 IPv4；请检查网络后重试 jd。\n'
