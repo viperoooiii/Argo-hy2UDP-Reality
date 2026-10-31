@@ -25,6 +25,8 @@ JD 节点部署
 
 安装后执行 `jd` 查看当前节点链接，执行 `jdxz` 完全卸载；普通用户分别执行 `sudo jd` 和 `sudo jdxz`。`jd` 会读取当前 cloudflared 进程的日志，显示最新的临时隧道域名。服务与配置位于 `/opt/jd-node`，systemd 单元分别为 `jd-xray`、`jd-argo`、`jd-hy2`、`jd-reality`。
 
+节点链接的显示名称分别为 `A`（Argo）、`H`（Hysteria2）和 `R`（Reality）。
+
 已通过旧版脚本安装的 VPS，重新运行上方一键命令并选择原来安装的选项，即可添加 `jdxz` 命令；运行中的节点及其链接会保留。`jdxz` 只清理由本仓库创建的服务和文件，不会卸载其他脚本的节点。系统历史 journal 日志由系统管理，不随 `jdxz` 清除。
 
 若使用早期版本通过 `bash <(curl …)` 安装后，`jd` 报错或没有输出，可直接修复管理脚本：
